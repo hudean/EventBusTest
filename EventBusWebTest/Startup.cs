@@ -96,7 +96,7 @@ namespace EventBusWebTest
             {
                 endpoints.MapControllers();
             });
-            ConfigureEventBus(app);
+            //ConfigureEventBus(app);
         }
 
         /// <summary>

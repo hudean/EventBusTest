@@ -55,12 +55,27 @@ namespace EventBus.EventBusRabbitMQ
 
         public void Dispose()
         {
+            //if (_disposed) return;
+
+            //_disposed = true;
+
+            //try
+            //{
+            //    _connection?.Dispose();
+            //}
+            //catch (IOException ex)
+            //{
+            //    _logger.LogCritical(ex.ToString());
+            //}
             if (_disposed) return;
 
             _disposed = true;
 
             try
             {
+                _connection.ConnectionShutdown -= OnConnectionShutdown;
+                _connection.CallbackException -= OnCallbackException;
+                _connection.ConnectionBlocked -= OnConnectionBlocked;
                 _connection?.Dispose();
             }
             catch (IOException ex)
